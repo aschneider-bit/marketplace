@@ -1,12 +1,63 @@
- <!DOCTYPE html>                                                                                                       
-  <html lang="en">                                                                                                      
+ ⏺ <!DOCTYPE html>                                                                                                       
+  <html lang="en">                                                                                                    
   <head>                                                                                                                
-      <meta charset="UTF-8">                                                                                            
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">                                          
-      <title>Marketplace | OurFamilyWizard</title>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" 
+      <meta charset="UTF-8">                                                                                          
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">                                            
+      <title>Marketplace | OurFamilyWizard</title>                                                                    
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" 
   rel="stylesheet">
+      <link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css">
       <style>
+          :root {
+              --blue-100: #FCFCF9;
+              --blue-200: #EEF5F8;
+              --blue-300: #DDECF2;
+              --blue-400: #7FC8E5;
+              --blue-500: #018ABC;
+              --blue-600: #006BA1;
+              --blue-700: #014C72;
+              --blue-800: #122845;
+
+              --grey-100: #FAF9F3;
+              --grey-200: #F3F3ED;
+              --grey-300: #EBEDE9;
+              --grey-400: #D5DCDB;
+              --grey-500: #B1BFC2;
+              --grey-600: #97ACB2;
+              --grey-700: #688792;
+              --grey-800: #3A5368;
+
+              --brand-parchment: #F6F4E8;
+              --brand-manilla: #EDE9D1;
+              --brand-lichen: #C9EBCF;
+              --brand-moss: #60C47C;
+              --brand-nori: #03563A;
+              --brand-gilt: #D6A92D;
+              --brand-ochre: #755300;
+
+              --text-base: #122845;
+              --text-secondary: #014C72;
+              --text-muted: #3A5368;
+              --text-inverse: #FCFCF9;
+              --text-disabled: #97ACB2;
+
+              --bg-page: #FCFCF9;
+              --bg-card: #FFFFFF;
+              --bg-section: #F6F4E8;
+              --bg-hero: #EEF5F8;
+              --bg-ink: #122845;
+
+              --border-subtle: #D5DCDB;
+              --border-default: #B1BFC2;
+
+              --cerulean: #006BA1;
+              --cerulean-hover: #014C72;
+              --cerulean-pressed: #122845;
+
+              --font-sans: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+              --font-display: "freight-text-pro", Georgia, "Times New Roman", serif;
+          }
+
           * {
               margin: 0;
               padding: 0;
@@ -14,100 +65,124 @@
           }
 
           body {
-              font-family: 'Montserrat', sans-serif;
-              color: #2d3748;
-              background-color: #ffffff;
+              font-family: var(--font-sans);
+              color: var(--text-base);
+              background-color: var(--bg-page);
               line-height: 1.6;
+              font-size: 16px;
           }
 
-          /* Header */
-          .header {
-              background-color: #ffffff;
-              border-bottom: 1px solid #e2e8f0;
-              padding: 16px 0;
+          /* Navigation */
+          .nav {
               position: sticky;
               top: 0;
               z-index: 100;
-              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+              background: var(--bg-card);
+              border-bottom: 1px solid var(--border-subtle);
+              height: 72px;
+              display: flex;
+              align-items: center;
           }
 
-          .header-inner {
+          .nav-inner {
               max-width: 1200px;
               margin: 0 auto;
               padding: 0 24px;
+              width: 100%;
               display: flex;
               align-items: center;
-              justify-content: space-between;
           }
 
-          .logo {
+          .nav-logo {
               display: flex;
               align-items: center;
               text-decoration: none;
+              color: var(--text-base);
+              font-size: 20px;
+              font-weight: 700;
+              gap: 12px;
           }
 
-          .logo svg {
-              height: 40px;
-              width: auto;
+          .nav-logo-text {
+              white-space: nowrap;
           }
 
-          .header-nav a {
-              font-size: 14px;
-              font-weight: 500;
-              color: #0E8DA2;
-              text-decoration: none;
-              margin-left: 24px;
-              transition: color 0.2s;
-          }
-
-          .header-nav a:hover {
-              color: #0a6b7a;
+          .nav-badge {
+              display: inline-block;
+              background: var(--blue-300);
+              color: var(--text-secondary);
+              font-size: 11px;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              padding: 4px 10px;
+              border-radius: 4px;
           }
 
           /* Hero Section */
           .hero {
-              background: linear-gradient(135deg, #f0fafb 0%, #e6f7f9 100%);
+              background: var(--bg-ink);
               padding: 64px 24px;
-              text-align: center;
           }
 
           .hero-inner {
-              max-width: 800px;
+              max-width: 1200px;
               margin: 0 auto;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 48px;
+              align-items: center;
+          }
+
+          .hero-content {
+              color: var(--text-inverse);
+          }
+
+          .hero-eyebrow {
+              font-size: 13px;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: var(--blue-400);
+              margin-bottom: 16px;
           }
 
           .hero h1 {
-              font-size: 36px;
+              font-family: var(--font-display);
+              font-size: 42px;
               font-weight: 700;
-              color: #1a365d;
+              line-height: 1.2;
               margin-bottom: 20px;
+              color: var(--text-inverse);
           }
 
           .hero p {
-              font-size: 18px;
-              color: #4a5568;
+              font-size: 16px;
               line-height: 1.7;
-              max-width: 680px;
-              margin: 0 auto;
+              color: var(--grey-500);
           }
 
-          /* Hero Image */
-          .hero-image {
-              max-width: 1200px;
-              margin: 0 auto;
-              padding: 0 24px;
-          }
-
-          .hero-image img {
-              width: 100%;
-              max-height: 400px;
-              object-fit: cover;
+          .hero-img-wrap {
+              position: relative;
               border-radius: 12px;
-              margin-top: -32px;
-              box-shadow: 0 20px 60px rgba(14, 141, 162, 0.15);
+              overflow: hidden;
           }
 
-          /* Partner Cards Section */
+          .hero-img-wrap img {
+              width: 100%;
+              height: 340px;
+              object-fit: cover;
+              display: block;
+          }
+
+          .hero-img-wrap::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(135deg, rgba(18,40,69,0.3) 0%, transparent 60%);
+          }
+
+          /* Cards Section */
           .marketplace-section {
               max-width: 1200px;
               margin: 0 auto;
@@ -116,239 +191,306 @@
 
           .cards-grid {
               display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-              gap: 32px;
-              margin-top: 16px;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 24px;
           }
 
-          .partner-card {
-              background: #ffffff;
-              border: 1px solid #e2e8f0;
-              border-radius: 12px;
+          .card {
+              background: var(--bg-card);
+              border: 1px solid var(--border-subtle);
+              border-radius: 16px;
               padding: 32px;
-              transition: box-shadow 0.3s, transform 0.2s;
               display: flex;
               flex-direction: column;
+              transition: all 0.2s ease;
+              position: relative;
+              overflow: hidden;
           }
 
-          .partner-card:hover {
-              box-shadow: 0 10px 40px rgba(14, 141, 162, 0.12);
+          .card::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 3px;
+              background: linear-gradient(90deg, var(--blue-500), var(--blue-400));
+              opacity: 0;
+              transition: opacity 0.2s ease;
+          }
+
+          .card:hover {
+              box-shadow: 0 8px 32px rgba(18, 40, 69, 0.10);
               transform: translateY(-2px);
           }
 
-          .partner-card.coming-soon {
-              opacity: 0.75;
-              border-style: dashed;
+          .card:hover::before {
+              opacity: 1;
           }
 
-          .partner-logo {
-              height: 48px;
+          .card--coming-soon {
+              opacity: 0.6;
+          }
+
+          .card--coming-soon:hover {
+              box-shadow: none;
+              transform: none;
+          }
+
+          .card--coming-soon::before {
+              display: none;
+          }
+
+          .card-logo {
+              height: 44px;
               width: auto;
-              max-width: 160px;
+              max-width: 140px;
               object-fit: contain;
               margin-bottom: 20px;
           }
 
-          .partner-logo-placeholder {
-              height: 48px;
+          .card-logo-placeholder {
+              height: 44px;
               display: flex;
               align-items: center;
               margin-bottom: 20px;
-              font-size: 24px;
+              font-size: 22px;
               font-weight: 700;
-              color: #1a365d;
+              color: var(--text-base);
           }
 
-          .partner-card h3 {
+          .card h3 {
               font-size: 20px;
               font-weight: 600;
-              color: #1a365d;
+              color: var(--text-base);
               margin-bottom: 12px;
           }
 
-          .partner-card p {
+          .card p {
               font-size: 15px;
-              color: #4a5568;
+              color: var(--text-muted);
               margin-bottom: 20px;
               flex-grow: 1;
+              line-height: 1.6;
           }
 
-          .offer-details {
-              background: #f0fafb;
-              border: 1px solid #b2e5ec;
+          .card-offer {
+              background: var(--brand-lichen);
+              border: 1px solid #A8DAAF;
               border-radius: 8px;
               padding: 12px 16px;
               margin-bottom: 20px;
               font-size: 14px;
-              font-weight: 500;
-              color: #0E8DA2;
-          }
-
-          .offer-details::before {
-              content: "Offer: ";
               font-weight: 600;
+              color: var(--brand-nori);
           }
 
-          .redeem-btn {
-              display: inline-block;
-              background-color: #0E8DA2;
+          .card-btn {
+              display: block;
+              width: 100%;
+              background-color: var(--cerulean);
               color: #ffffff;
               text-decoration: none;
-              padding: 12px 24px;
+              padding: 14px 24px;
               border-radius: 8px;
               font-size: 14px;
               font-weight: 600;
               text-align: center;
-              transition: background-color 0.2s;
+              transition: background-color 0.2s ease;
+              border: none;
+              cursor: pointer;
           }
 
-          .redeem-btn:hover {
-              background-color: #0a6b7a;
+          .card-btn:hover {
+              background-color: var(--cerulean-hover);
           }
 
-          .coming-soon-badge {
-              display: inline-block;
-              background: #edf2f7;
-              color: #718096;
-              padding: 8px 16px;
-              border-radius: 20px;
-              font-size: 13px;
-              font-weight: 600;
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
+          .card-btn--disabled {
+              background-color: var(--grey-400);
+              color: var(--text-disabled);
+              cursor: not-allowed;
           }
 
-          /* Footer CTA */
-          .partner-cta {
-              text-align: center;
+          .card-btn--disabled:hover {
+              background-color: var(--grey-400);
+          }
+
+          /* Footer */
+          .footer {
+              background: var(--bg-ink);
               padding: 48px 24px;
-              background: #f7fafc;
-              border-top: 1px solid #e2e8f0;
+              text-align: center;
           }
 
-          .partner-cta p {
-              font-size: 16px;
-              color: #4a5568;
+          .footer-inner {
+              max-width: 1200px;
+              margin: 0 auto;
           }
 
-          .partner-cta a {
-              color: #0E8DA2;
-              font-weight: 600;
+          .footer p {
+              font-size: 14px;
+              color: var(--grey-600);
+          }
+
+          .footer a {
+              color: var(--blue-400);
               text-decoration: none;
+              font-weight: 600;
           }
 
-          .partner-cta a:hover {
+          .footer a:hover {
               text-decoration: underline;
           }
 
+          .footer-copy {
+              margin-top: 16px;
+              font-size: 13px;
+              color: var(--grey-700);
+          }
+
           /* Responsive */
-          @media (max-width: 768px) {
+          @media (max-width: 960px) {
+              .cards-grid {
+                  grid-template-columns: repeat(2, 1fr);
+              }
+
+              .hero-inner {
+                  grid-template-columns: 1fr;
+                  gap: 32px;
+              }
+
+              .hero h1 {
+                  font-size: 34px;
+              }
+          }
+
+          @media (max-width: 600px) {
+              .nav {
+                  height: 60px;
+              }
+
+              .nav-logo {
+                  font-size: 17px;
+              }
+
+              .nav-badge {
+                  font-size: 10px;
+                  padding: 3px 8px;
+              }
+
+              .hero {
+                  padding: 48px 16px;
+              }
+
               .hero h1 {
                   font-size: 28px;
               }
 
-              .hero p {
-                  font-size: 16px;
+              .hero-img-wrap {
+                  display: none;
+              }
+
+              .marketplace-section {
+                  padding: 48px 16px;
               }
 
               .cards-grid {
                   grid-template-columns: 1fr;
-                  gap: 24px;
+                  gap: 20px;
               }
 
-              .header-nav {
-                  display: none;
+              .card {
+                  padding: 24px;
+              }
+
+              .footer {
+                  padding: 36px 16px;
               }
           }
       </style>
   </head>
   <body>
-      <!-- Header -->
-      <header class="header">
-          <div class="header-inner">
-              <a href="https://www.ourfamilywizard.com" class="logo">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 40" height="40">
-                      <text x="0" y="30" font-family="Montserrat, sans-serif" font-size="22" font-weight="700" 
-  fill="#1a365d">OurFamily</text>
-                      <text x="138" y="30" font-family="Montserrat, sans-serif" font-size="22" font-weight="700" 
-  fill="#0E8DA2">Wizard</text>
-                  </svg>
+      <!-- Navigation -->
+      <nav class="nav">
+          <div class="nav-inner">
+              <a class="nav-logo" href="https://www.ourfamilywizard.com">
+                  <span class="nav-logo-text">OurFamilyWizard</span>
+                  <span class="nav-badge">Marketplace</span>
               </a>
-              <nav class="header-nav">
-                  <a href="https://www.ourfamilywizard.com/product-features">Features</a>
-                  <a href="https://www.ourfamilywizard.com/pricing">Pricing</a>
-                  <a href="https://www.ourfamilywizard.com/login">Sign In</a>
-              </nav>
           </div>
-      </header>
+      </nav>
 
       <!-- Hero Section -->
       <section class="hero">
           <div class="hero-inner">
-              <h1>Curated Products and Services</h1>
-              <p>Our mission at OurFamilyWizard is simple: make the lives of modern families easier. In the
+              <div class="hero-content">
+                  <div class="hero-eyebrow">OurFamilyWizard Subscriber Benefits</div>
+                  <h1>Curated Products and Services</h1>
+                  <p>Our mission at OurFamilyWizard is simple: make the lives of modern families easier. In the
   OurFamilyWizard Marketplace, you'll find the products and services we recommend most. But the best part? Exclusive
   savings for OurFamilyWizard members.</p>
+              </div>
+              <div class="hero-img-wrap">
+                  <img src="https://www.ourfamilywizard.com/sites/default/files/styles/max_650x650/public/media/image/20
+  23-03/blog-brand-refresh-1.png" alt="A family enjoying time together">
+              </div>
           </div>
       </section>
-
-      <!-- Hero Image -->
-      <div class="hero-image">
-          <img src="https://www.ourfamilywizard.com/sites/default/files/styles/max_650x650/public/media/image/2023-03/bl
-  og-brand-refresh-1.png" alt="A family enjoying time together">
-      </div>
 
       <!-- Partner Cards -->
       <section class="marketplace-section">
           <div class="cards-grid">
               <!-- Lemonade -->
-              <div class="partner-card">
-                  <div class="partner-logo-placeholder">Lemonade</div>
+              <div class="card">
+                  <img src="https://lemonade.ck-cdn.com/tn/serve/?cid=1222431" alt="Lemonade" class="card-logo">
                   <h3>Lemonade</h3>
                   <p>Home insurance built for the 21st century. Lemonade's amazing coverage protects the stuff you own
   at home and everywhere else.</p>
-                  <div class="offer-details">20% discount off the 1st month</div>
-                  <a href="https://www.lemonade.com/renters" class="redeem-btn" target="_blank" rel="noopener">Redeem
-  Offer</a>
+                  <div class="card-offer">20% discount off the 1st month</div>
+                  <a href="https://go.lemonade.com/visit/?bta=37858&brand=rent" class="card-btn" target="_blank" 
+  rel="noopener">Redeem Offer</a>
               </div>
 
               <!-- BetterHelp -->
-              <div class="partner-card">
-                  <div class="partner-logo-placeholder">BetterHelp</div>
+              <div class="card">
+                  <img src="BH_Logo_250x50.png" alt="BetterHelp" class="card-logo">
                   <h3>BetterHelp</h3>
                   <p>Digital mental health platform that matches users with licensed, accredited therapists for online
   counseling.</p>
-                  <div class="offer-details">20% discount off the 1st month</div>
-                  <a href="https://www.betterhelp.com/get-started/" class="redeem-btn" target="_blank" 
+                  <div class="card-offer">20% off your first month</div>
+                  <a href="https://impact.betterhelp.com/c/7381468/3769750/39552" class="card-btn" target="_blank" 
   rel="noopener">Redeem Offer</a>
               </div>
 
               <!-- Keepr -->
-              <div class="partner-card">
-                  <div class="partner-logo-placeholder">Keepr</div>
+              <div class="card">
+                  <div class="card-logo-placeholder">Keepr</div>
                   <h3>Keepr</h3>
                   <p>Discreet, pocket-sized breathalyzer that pairs with a mobile app to measure, log, and share Breath
   Alcohol Concentration (BrAC) in real-time.</p>
-                  <div class="offer-details">20% discount off the 1st month</div>
-                  <a href="https://yourkeepr.com/" class="redeem-btn" target="_blank" rel="noopener">Redeem Offer</a>
+                  <div class="card-offer">20% discount off the 1st month</div>
+                  <a href="https://yourkeepr.com/" class="card-btn" target="_blank" rel="noopener">Redeem Offer</a>
               </div>
 
               <!-- Coming Soon -->
-              <div class="partner-card coming-soon">
-                  <div class="partner-logo-placeholder">Coming Soon</div>
+              <div class="card card--coming-soon">
+                  <div class="card-logo-placeholder">Coming Soon</div>
                   <h3>Financial Product</h3>
                   <p>A personal loan is an installment loan that provides a lump sum of money, which you pay back in
   fixed monthly payments over a set period.</p>
-                  <div class="offer-details">20% discount off the 1st month</div>
-                  <span class="coming-soon-badge">Coming Soon</span>
+                  <div class="card-offer">20% discount off the 1st month</div>
+                  <span class="card-btn card-btn--disabled">Coming Soon</span>
               </div>
           </div>
       </section>
 
-      <!-- Partner CTA -->
-      <footer class="partner-cta">
-          <p>Interested in becoming a partner? Email us at <a 
+      <!-- Footer -->
+      <footer class="footer">
+          <div class="footer-inner">
+              <p>Interested in becoming a partner? Email us at <a 
   href="mailto:partnerships@ourfamilywizard.com">partnerships@ourfamilywizard.com</a></p>
+              <p class="footer-copy">&copy; 2026 OurFamilyWizard. All rights reserved.</p>
+          </div>
       </footer>
   </body>
   </html>
