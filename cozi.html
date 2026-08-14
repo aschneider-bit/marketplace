@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketplace | Cozi</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cozi:       #29ABE2;
+      --cozi-dk:    #1A87B8;
+      --cozi-lt:    #E8F5FD;
+      --cozi-mid:   #4BBDE8;
+      --text:       #1A1A1A;
+      --text-2:     #555555;
+      --text-3:     #999999;
+      --border:     #E0E0E0;
+      --border-lt:  #EBEBEB;
+      --bg:         #F4F6F8;
+      --white:      #FFFFFF;
+      --green:      #2BAD6A;
+      --orange:     #E8883A;
+      --radius:     10px;
+      --radius-lg:  16px;
+    }
+
+    body {
+      font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--cozi);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      flex: 1;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background .15s, color .15s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+    .nav-links a.active { background: rgba(255,255,255,0.2); color: #fff; font-weight: 600; }
+    .nav-signup {
+      background: #fff;
+      color: var(--cozi);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity .15s;
+    }
+    .nav-signup:hover { opacity: 0.9; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--cozi);
+      padding: 48px 20px 56px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.6;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-white {
+      background: #fff;
+      color: var(--cozi);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 11px 24px;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: border-color .15s, background .15s;
+    }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--cozi-dk);
+      padding: 0 20px;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat {
+      padding: 16px 40px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-n { font-size: 22px; font-weight: 800; color: #fff; line-height: 1; }
+    .stat-l { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 3px; font-weight: 500; letter-spacing: .02em; }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    /* ── FEATURED ── */
+    .featured {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+    .featured-body { padding: 28px 32px; }
+    .featured-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cozi);
+      margin-bottom: 8px;
+    }
+    .featured-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.3px; }
+    .featured-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; margin-bottom: 18px; max-width: 480px; }
+    .offer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFF3E0;
+      border: 1px solid #FFD699;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #B35C00;
+      margin-bottom: 16px;
+    }
+    .btn-cozi {
+      display: inline-block;
+      background: var(--cozi);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .btn-cozi:hover { background: var(--cozi-dk); }
+    .featured-stripe {
+      background: var(--cozi);
+      width: 140px;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 24px 16px;
+    }
+    .featured-discount {
+      font-size: 36px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .featured-discount-sub { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 600; text-align: center; }
+
+    /* ── SECTION HEADER ── */
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .section-title { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+    .section-sub { font-size: 13px; color: var(--text-3); margin-top: 3px; }
+
+    /* ── FILTER PILLS ── */
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .filter {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--text-2);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .15s;
+      display: inline-block;
+    }
+    .filter:hover { border-color: var(--cozi); color: var(--cozi); }
+    .filter.active { background: var(--cozi); border-color: var(--cozi); color: #fff; }
+
+    /* ── CARD GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(41,171,226,0.12), 0 1px 4px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+    .card-header {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      position: relative;
+    }
+    .card-logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .card-badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+    .badge-orange { background: var(--orange); color: #fff; }
+    .badge-blue   { background: var(--cozi);   color: #fff; }
+    .badge-green  { background: var(--green);  color: #fff; }
+
+    .card-body {
+      padding: 16px 20px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border-lt);
+    }
+    .card-cat {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+    .card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.55;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+    .card-offer-row {
+      background: #FFF8EC;
+      border: 1px solid #FFE4B0;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #A05800;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn-cozi-sm {
+      background: var(--cozi);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .btn-cozi-sm:hover { background: var(--cozi-dk); }
+    .card-tier {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 500;
+    }
+
+    /* Card header colors */
+    .ch-sky    { background: #E8F5FD; }
+    .ch-mint   { background: #E6F9F1; }
+    .ch-peach  { background: #FEF3EC; }
+    .ch-lavender { background: #F0ECFB; }
+    .ch-lemon  { background: #FEFCE8; }
+    .ch-rose   { background: #FEF0F5; }
+    .ch-teal   { background: #E6F9FA; }
+    .ch-sand   { background: #FBF8F0; }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+    }
+    .how-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.3px; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .step { text-align: center; }
+    .step-num {
+      width: 40px; height: 40px;
+      background: var(--cozi-lt);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--cozi);
+      margin: 0 auto 12px;
+    }
+    .step-t { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .step-d { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .tcard {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+    .tcard-stars { color: var(--orange); font-size: 14px; margin-bottom: 10px; }
+    .tcard-text { font-size: 14px; color: var(--text-2); line-height: 1.6; font-style: italic; margin-bottom: 14px; }
+    .tcard-author { display: flex; align-items: center; gap: 10px; }
+    .tcard-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .tcard-name { font-size: 13px; font-weight: 700; }
+    .tcard-sub { font-size: 12px; color: var(--text-3); }
+
+    /* ── UPGRADE BANNER ── */
+    .upgrade {
+      background: var(--cozi-lt);
+      border: 1.5px solid #B3DDEF;
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .upgrade-text .upgrade-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .upgrade-text .upgrade-sub { font-size: 13px; color: var(--text-2); }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--cozi);
+      padding: 40px 20px 28px;
+      margin-top: 48px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 220px 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-bottom: 20px;
+    }
+    .footer-logo-text { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+    .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.8); text-decoration: none; transition: color .15s; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.6); }
+    .footer-legal { display: flex; gap: 16px; }
+    .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; }
+    .footer-legal a:hover { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured-stripe { width: 100%; flex-direction: row; padding: 14px 20px; }
+      .steps { grid-template-columns: 1fr; }
+      .testimonials { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .upgrade { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 540px) {
+      .nav-links { display: none; }
+      .stats-inner { flex-direction: column; gap: 0; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding: 12px 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-text">cozi</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#" class="active">Marketplace</a></li>
+      <li><a href="#">Family Resources</a></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+    <a href="#" class="nav-signup">Sign up — it's free!</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Cozi Subscriber Benefits</div>
+  <h1>Curated Products &amp; Services<br />for Busy Families</h1>
+  <p class="hero-sub">Exclusive savings on the brands and tools we recommend most — handpicked to make family life a little easier.</p>
+  <div class="hero-btns">
+    <a href="#deals" class="btn-white">Browse All Deals</a>
+    <a href="#" class="btn-outline-white">Sign In to Unlock</a>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-n">30+</div>
+      <div class="stat-l">Partner Brands</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">$500+</div>
+      <div class="stat-l">in Annual Savings</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">10M+</div>
+      <div class="stat-l">Families Trust Cozi</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main" id="deals">
+
+  <!-- FEATURED PARTNER -->
+  <div class="featured">
+    <div class="featured-body">
+      <div class="featured-tag">⭐ Featured Partner</div>
+      <div class="featured-title">HelloFresh — Family Meal Kits, Simplified</div>
+      <div class="featured-desc">Skip the trip to the grocery store. HelloFresh delivers fresh, pre-portioned ingredients and easy 30-minute recipes right to your door.</div>
+      <div class="offer-pill">🎁 Exclusive: 30% off your first three boxes</div>
+      <br />
+      <a href="#" class="btn-cozi">Claim Offer</a>
+    </div>
+    <div class="featured-stripe">
+      <div class="featured-discount">30%</div>
+      <div class="featured-discount-sub">Off First<br />3 Boxes</div>
+    </div>
+  </div>
+
+  <!-- SECTION HEADER -->
+  <div class="section-head">
+    <div>
+      <div class="section-title">Deals &amp; Discounts for Cozi Families</div>
+      <div class="section-sub">Sign in to reveal subscriber-only codes</div>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <a href="#" class="filter active">All Deals</a>
+    <a href="#" class="filter">Meal &amp; Groceries</a>
+    <a href="#" class="filter">Kids &amp; Education</a>
+    <a href="#" class="filter">Health &amp; Wellness</a>
+    <a href="#" class="filter">Home &amp; Finance</a>
+    <a href="#" class="filter">Entertainment</a>
+    <a href="#" class="filter">Travel</a>
+  </div>
+
+  <!-- PARTNER GRID -->
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-header ch-mint">
+        <div class="card-logo-text" style="color:#2BAD6A">HelloFresh</div>
+        <div class="card-badge badge-orange">30% Off</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Meal &amp; Groceries</div>
+        <div class="card-name">HelloFresh</div>
+        <div class="card-desc">Family meal kits with fresh ingredients and quick recipes. No planning, no wasted food — just dinner done.</div>
+        <div class="card-offer-row">🎁 30% off first 3 boxes — exclusive to Cozi</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">Cozi Gold</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-sky">
+        <div class="card-logo-text" style="color:#29ABE2">ABCmouse</div>
+        <div class="card-badge badge-blue">Exclusive</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Kids &amp; Education</div>
+        <div class="card-name">ABCmouse</div>
+        <div class="card-desc">Award-winning early learning for ages 2–8. Over 10,000 activities in reading, math, science, and art.</div>
+        <div class="card-offer-row">🎁 First month free — Cozi subscribers only</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">All Members</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-lavender">
+        <div class="card-logo-text" style="color:#7B61C9">Calm</div>
+        <div class="card-badge badge-orange">20% Off</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Health &amp; Wellness</div>
+        <div class="card-name">Calm</div>
+        <div class="card-desc">Sleep stories, guided meditations, and breathing exercises. For parents who need a moment of quiet.</div>
+        <div class="card-offer-row">🎁 20% off Calm Premium annual plan</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">Cozi Gold</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-teal">
+        <div class="card-logo-text" style="color:#17B2C8">KiwiCo</div>
+        <div class="card-badge badge-green">New</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Kids &amp; Education</div>
+        <div class="card-name">KiwiCo</div>
+        <div class="card-desc">STEM and art project crates delivered monthly. Hands-on learning that sparks curiosity for ages 0–16+.</div>
+        <div class="card-offer-row">🎁 First crate for $4.95 — save over $20</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">All Members</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-sky">
+        <div class="card-logo-text" style="color:#E8883A">Instacart</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Meal &amp; Groceries</div>
+        <div class="card-name">Instacart</div>
+        <div class="card-desc">Groceries from your favorite local stores, delivered in as fast as 1 hour. Works great with your Cozi shopping list.</div>
+        <div class="card-offer-row">🎁 Free delivery on first 3 orders + 3 months Instacart+</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">All Members</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-lemon">
+        <div class="card-logo-text" style="color:#C09000">Lowe's</div>
+        <div class="card-badge badge-orange">15% Off</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Home &amp; Finance</div>
+        <div class="card-name">Lowe's Home Improvement</div>
+        <div class="card-desc">Appliances, tools, décor, and lawn supplies. Because the home to-do list never ends.</div>
+        <div class="card-offer-row">🎁 15% off a single purchase of $100+</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">Cozi Gold</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-rose">
+        <div class="card-logo-text" style="color:#C0146A">Disney+</div>
+        <div class="card-badge badge-green">New</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Entertainment</div>
+        <div class="card-name">Disney+</div>
+        <div class="card-desc">Disney, Marvel, Star Wars, Pixar, and National Geographic all in one place — unlimited family entertainment.</div>
+        <div class="card-offer-row">🎁 3 months for the price of 1 — new subscribers</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">All Members</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-sky">
+        <div class="card-logo-text" style="color:#E8883A">Hotels.com</div>
+        <div class="card-badge badge-blue">Exclusive</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Travel</div>
+        <div class="card-name">Hotels.com</div>
+        <div class="card-desc">Family-friendly hotels with flexible cancellation. Earn reward nights and find properties with pools and connecting rooms.</div>
+        <div class="card-offer-row">🎁 Extra 10% off — use code COZI10</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">Cozi Gold</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header ch-mint">
+        <div class="card-logo-text" style="color:#2BAD6A">Care.com</div>
+        <div class="card-badge badge-green">Free Trial</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Health &amp; Wellness</div>
+        <div class="card-name">Care.com</div>
+        <div class="card-desc">Find trusted childcare, senior care, housekeepers, pet sitters, and tutors in your area. Background-checked and reviewed.</div>
+        <div class="card-offer-row">🎁 1-month free Premium for new users</div>
+        <div class="card-footer">
+          <a href="#" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">All Members</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" style="background:#FBE9E4; padding: 0 20px;">
+        <img src="poppins-payroll-logo.png" alt="Poppins Payroll" style="height:44px; width:auto; object-fit:contain;" />
+        <div class="card-badge badge-orange">2 Months Free</div>
+      </div>
+      <div class="card-body">
+        <div class="card-cat">Home &amp; Finance</div>
+        <div class="card-name">Poppins Payroll</div>
+        <div class="card-desc">Household payroll, taxes, and compliance for families with nannies or senior caregivers — fully handled so you don't have to.</div>
+        <div class="card-offer-row">🎁 2 months free (a $100 value) with code <strong>INTANDEM</strong></div>
+        <div class="card-footer">
+          <a href="https://tinyurl.com/344s3yjn" target="_blank" class="btn-cozi-sm">Get Offer</a>
+          <span class="card-tier">All Members</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end grid -->
+
+  <!-- HOW IT WORKS -->
+  <div class="how">
+    <div class="how-title">How to Access Your Subscriber Savings</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-t">Sign In to Cozi</div>
+        <div class="step-d">Log in to your free or Gold Cozi account to reveal exclusive discount codes and offer links.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-t">Browse &amp; Choose</div>
+        <div class="step-d">Filter deals by category and find the ones that fit your family's life right now.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-t">Claim &amp; Save</div>
+        <div class="step-d">Click "Get Offer," copy your code, and check out on the partner's site. Simple as that.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section-head" style="margin-top:8px">
+    <div class="section-title">What Cozi Families Are Saying</div>
+  </div>
+  <div class="testimonials">
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"I use Cozi every single day for our family calendar, and I had no idea there were deals here too. Saved $60 on meal kits this month alone."</div>
+      <div class="tcard-author">
+        <div class="tcard-avatar" style="background:#29ABE2">JM</div>
+        <div>
+          <div class="tcard-name">Jamie M.</div>
+          <div class="tcard-sub">Mom of 3 · Portland, OR</div>
+        </div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-stars">★★★★★</div>
+      <div class="tcard-text">"The KiwiCo deal is amazing — my kids love the monthly crates and it keeps them off screens. Getting it at a discount through Cozi was a huge bonus."</div>
+      <div class="tcard-author">
+        <div class="tcard-avatar" style="background:#E8883A">DK</div>
+        <div>
+          <div class="tcard-name">Devon K.</div>
+          <div class="tcard-sub">Dad of 2 · Austin, TX</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPGRADE NUDGE -->
+  <div class="upgrade">
+    <div class="upgrade-text">
+      <div class="upgrade-title">Unlock More Deals with Cozi Gold</div>
+      <div class="upgrade-sub">Gold members get access to exclusive partner offers, ad-free experience, and premium features — starting at just $29.99/year.</div>
+    </div>
+    <a href="#" class="btn-cozi" style="flex-shrink:0">Upgrade to Gold</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-text">cozi</div>
+        <div class="footer-tagline">Family Life. Simplified.™<br /><br />Helping millions of families coordinate calendars, lists, and life — all in one place.</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <ul>
+          <li><a href="#">Family Calendar</a></li>
+          <li><a href="#">Shopping Lists</a></li>
+          <li><a href="#">To-Do Lists</a></li>
+          <li><a href="#">Recipes</a></li>
+          <li><a href="#">Cozi Gold</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Marketplace</div>
+        <ul>
+          <li><a href="#">All Deals</a></li>
+          <li><a href="#">Meal &amp; Groceries</a></li>
+          <li><a href="#">Kids &amp; Education</a></li>
+          <li><a href="#">Health &amp; Wellness</a></li>
+          <li><a href="#">Home &amp; Finance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Partner With Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 Cozi Inc. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
